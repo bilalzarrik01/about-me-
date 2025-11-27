@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bilal Zarrik — Ultimate Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <style>
+    /* Popup animations */
+    .scale-90 { transform: scale(0.9); }
+    .scale-100 { transform: scale(1); transition: transform 0.2s ease; }
+    .animate-fade { animation: fadeIn 0.3s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+
+    /* Neon hover for social icons */
+    .neon-hover:hover { text-shadow: 0 0 6px currentColor, 0 0 12px currentColor, 0 0 18px currentColor; }
+  </style>
+<style>
+  #cursor-inner, #cursor-outer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 999999;
+  }
+
+  /* Inner small dot */
+  #cursor-inner {
+    width: 8px;
+    height: 8px;
+    background: #00eaff;
+    border-radius: 50%;
+  }
+
+  /* Outer glow circle */
+  #cursor-outer {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #00eaff;
+    border-radius: 50%;
+    opacity: 0.25;
+    backdrop-filter: blur(4px);
+    transition: width .15s, height .15s, opacity .2s;
+  }
+
+  /* Link hover effect */
+  a:hover ~ #cursor-outer,
+  button:hover ~ #cursor-outer {
+    width: 60px;
+    height: 60px;
+    opacity: 0.35;
+  }
+</style>
+
+
+</head>
+<body class="bg-black text-white font-sans overflow-x-hidden">
+    <!-- robot -->
+ <div id="cursor-inner"></div>
+<div id="cursor-outer"></div>
+
+
+
+<!-- PRELOADER -->
+<div id="preloader" class="fixed inset-0 flex items-center justify-center bg-black z-50">
+  <div class="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-blue-600"></div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 left-0 w-full backdrop-blur-xl bg-white/5 border-b border-white/10 z-40">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">Bilal</h1>
+    <ul class="hidden md:flex gap-8 text-lg">
+      <li><a href="#home" class="hover:text-blue-500">Home</a></li>
+      <li><a href="#about" class="hover:text-blue-500">About</a></li>
+      <li><a href="#skills" class="hover:text-blue-500">Skills</a></li>
+      <li><a href="#projects" class="hover:text-blue-500">Projects</a></li>
+      <li><a href="#contact" class="hover:text-blue-500">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="relative h-screen w-full overflow-hidden">
+  <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-60">
+    <source src="https://youtu.be/WcX37NouKxw?si=X_3XUONShNXE8ztN" type="video/mp4">
+  </video>
+<div class="relative z-10 flex flex-col justify-center items-center h-full text-center select-none">
+
+<div class="relative z-10 flex flex-col justify-center items-center h-full text-center">
+
+  <!-- Floating Glow Behind Text -->
+  <div class="absolute inset-0 -z-10">
+    <div class="w-72 h-72 bg-purple-500/20 blur-3xl rounded-full absolute top-10 left-1/2 -translate-x-1/2 animate-pulse"></div>
+    <div class="w-96 h-96 bg-blue-500/10 blur-[120px] rounded-full absolute bottom-0 right-1/3 animate-ping"></div>
+  </div>
+
+  <!-- Name -->
+  <h1 class="text-6xl md:text-7xl font-extrabold tracking-tight 
+             bg-gradient-to-r from-white via-purple-200 to-violet-400 
+             bg-clip-text text-transparent 
+             drop-shadow-[0_0_25px_rgba(255,255,255,0.3)]
+             animate-[float_4s_ease-in-out_infinite]">
+    Bilal Zarrik
+  </h1>
+
+  <!-- Subtitle -->
+  <p class="text-xl md:text-2xl mt-6 opacity-100 font-light 
+            tracking-wide text-white/90
+            animate-[fadeSlideUp_1.5s_ease-out]">
+    Full-Stack Developer • Graphic Designer • PME/PMI Student
+  </p>
+
+  <!-- Animated Underline -->
+  <div class="mt-5 w-32 h-1 bg-gradient-to-r from-purple-400 to-violet-600 rounded-full 
+              animate-[expand_1.8s_ease-out]"></div>
+</div>
+
+<!-- Custom animations -->
+<style>
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes expand {
+  0% { width: 0; opacity: 0; }
+  100% { width: 8rem; opacity: 1; }
+}
+</style>
+
+
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-32 container mx-auto px-6">
+  <div class="grid md:grid-cols-2 gap-16 items-center">
+    <div>
+      <h2 class="text-4xl font-semibold mb-6">About Me</h2>
+      <p class="text-lg opacity-80 leading-relaxed">
+        I am Bilal Zarrik, a multi‑disciplinary creator blending <b>full‑stack development</b>, <b>graphic design</b>, and <b>business management</b>. I create modern digital experiences with high‑quality visual identity and clean technical execution.
+      </p>
+    </div>
+ <div class="rounded-3xl bg-white/10 backdrop-blur-xl h-80 shadow-2xl border border-white/20">
+ <video src="4.mp4" autoplay muted loop playsinline class="w-full h-full object-cover rounded-2xl">
+</div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="py-28 px-6 bg-gradient-to-b from-black to-gray-900">
+  <h2 class="text-center text-4xl font-bold mb-16">Skills</h2>
+  <div class="grid md:grid-cols-3 gap-12 container mx-auto">
+    <div class="p-8 rounded-3xl border border-blue-600/30 shadow-xl bg-blue-600/10 hover:shadow-blue-500/40 transition-all duration-300">
+      <h3 class="text-2xl mb-4">Frontend</h3>
+      <p class="opacity-80">HTML, CSS, JS, Tailwind, UI/UX, Animations</p>
+    </div>
+    <div class="p-8 rounded-3xl border border-purple-600/30 shadow-xl bg-purple-600/10 hover:shadow-purple-500/40 transition-all duration-300">
+      <h3 class="text-2xl mb-4">Backend</h3>
+      <p class="opacity-80">Node.js, APIs, Databases</p>
+    </div>
+    <div class="p-8 rounded-3xl border border-pink-600/30 shadow-xl bg-pink-600/10 hover:shadow-pink-500/40 transition-all duration-300">
+      <h3 class="text-2xl mb-4">Graphic Design</h3>
+      <p class="opacity-80">Branding, Logo Design, Social Media, Canva</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="py-32 container mx-auto px-6">
+  <h2 class="text-center text-4xl font-bold mb-14">Projects</h2>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-14">
+    <div class="group bg-white/10 p-6 rounded-3xl shadow-xl border border-white/20 transform hover:scale-[1.05] hover:-rotate-1 transition-all duration-500">
+        
+     <div class="h-48 rounded-2xl mb-4 overflow-hidden">
+<video src="1.mp4" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+</div>
+
+      <h3 class="text-2xl font-semibold mb-2">3D UI Landing Page</h3>
+      <p class="opacity-70">Creative & modern interface with premium animations.</p>
+    </div>
+    <div class="group bg-white/10 p-6 rounded-3xl shadow-xl border border-white/20 transform hover:scale-[1.05] hover:rotate-1 transition-all duration-500">
+           <div class="h-48 bg-gradient-to-br from-pink-600 to-orange-600 rounded-2xl mb-4"><video src="2.mp4" autoplay muted loop playsinline class="w-full h-full object-cover rounded-2xl"></video></div>
+      <h3 class="text-2xl font-semibold mb-2">Full‑Stack Dashboard</h3>
+      <p class="opacity-70">High‑quality backend + professional UI.</p>
+    </div>
+    <div class="group bg-white/10 p-6 rounded-3xl shadow-xl border border-white/20 transform hover:scale-[1.05] transition-all duration-500">
+      <div class="h-48 bg-gradient-to-br from-pink-600 to-orange-600 rounded-2xl mb-4"><video src="3.mp4" autoplay muted loop playsinline class="w-full h-full object-cover rounded-2xl"></video></div>
+      <h3 class="text-2xl font-semibold mb-2">Brand Identity Project</h3>
+      <p class="opacity-70">Logo, typography, guidelines and full branding.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-32 text-center bg-gradient-to-t from-black to-gray-900">
+  <h2 class="text-4xl font-bold mb-6">Let’s Work Together</h2>
+  <p class="text-lg opacity-80 mb-10">Tell me your idea — I build it beautifully.</p>
+  <button id="contactBtn" class="px-10 py-4 bg-blue-600 hover:bg-blue-800 rounded-xl text-lg font-semibold shadow-xl transition">Contact Me</button>
+</section>
+
+<!-- CONTACT POPUP -->
+<div id="socialPopup" class="fixed inset-0 hidden flex items-center justify-center bg-black/50 z-50">
+  <div class="relative w-80 p-6 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl scale-90 animate-fade transition-transform duration-300">
+    <!-- Close Button -->
+    <button id="closePopup" class="absolute top-3 right-3 text-white/70 hover:text-white text-xl font-bold">×</button>
+    
+    <!-- Title -->
+    <h3 class="text-2xl font-bold mb-6 text-center text-white">Find Me On</h3>
+
+    <!-- Social Links -->
+    <div class="flex flex-col gap-4 text-white">
+      <a href="https://www.linkedin.com/in/bilal-zarrik-15208238a/" target="_blank" class="flex items-center gap-3 px-4 py-2 rounded-xl neon-hover hover:text-blue-400 transition">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" class="w-6 h-6"> LinkedIn
+      </a>
+      <a href="https://www.instagram.com/bilvl.zvrik/" target="_blank" class="flex items-center gap-3 px-4 py-2 rounded-xl neon-hover hover:text-pink-400 transition">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" class="w-6 h-6"> Instagram
+      </a>
+      <a href="https://www.tiktok.com/@ssj_bilal" target="_blank" class="flex items-center gap-3 px-4 py-2 rounded-xl neon-hover hover:text-red-500 transition">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" class="w-6 h-6"> TikTok
+      </a>
+      <a href="bilalzarrik11@gmail.com" class="flex items-center gap-3 px-4 py-2 rounded-xl neon-hover hover:text-green-400 transition">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" class="w-6 h-6"> Gmail
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Popup scaling animation */
+  .scale-90 { transform: scale(0.9); }
+  .scale-100 { transform: scale(1); transition: transform 0.2s ease; }
+  .animate-fade { animation: fadeIn 0.3s ease forwards; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+
+  /* Neon glow hover effect */
+  .neon-hover:hover {
+    text-shadow: 0 0 8px currentColor, 0 0 16px currentColor, 0 0 24px currentColor;
+  }
+</style>
+
+<script>
+// Preloader
+window.onload = () => {
+  document.getElementById('preloader').style.opacity = '0';
+  setTimeout(() => document.getElementById('preloader').style.display = 'none', 500);
+};
+
+// Scroll Reveal
+ScrollReveal().reveal('section', { distance:'60px', duration:1200, easing:'ease', origin:'bottom' });
+
+// Contact popup logic
+const contactBtn = document.getElementById('contactBtn');
+const socialPopup = document.getElementById('socialPopup');
+const closePopup = document.getElementById('closePopup');
+
+contactBtn.addEventListener('click', () => {
+  socialPopup.classList.remove('hidden');
+  const card = socialPopup.querySelector('div');
+  card.classList.remove('scale-90');
+  card.classList.add('scale-100');
+});
+
+closePopup.addEventListener('click', () => {
+  const card = socialPopup.querySelector('div');
+  card.classList.add('scale-90');
+  setTimeout(() => socialPopup.classList.add('hidden'), 200);
+});
+
+socialPopup.addEventListener('click', (e) => {
+  if(e.target === socialPopup){
+    const card = socialPopup.querySelector('div');
+    card.classList.add('scale-90');
+    setTimeout(() => socialPopup.classList.add('hidden'), 200);
+  }
+});
+</script>
+<script>
+  const inner = document.getElementById("cursor-inner");
+  const outer = document.getElementById("cursor-outer");
+
+  let mouseX = 0, mouseY = 0;
+  let outerX = 0, outerY = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    inner.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+  });
+
+  function animate() {
+    outerX += (mouseX - outerX) * 0.12;
+    outerY += (mouseY - outerY) * 0.12;
+
+    outer.style.transform = `translate(${outerX}px, ${outerY}px)`;
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
+
+
+
+</body>
+</html>
