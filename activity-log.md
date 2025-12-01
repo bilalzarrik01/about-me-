@@ -74,3 +74,4 @@
 - December fill commit day 31 at 2025-12-31 12:00:00 +01:00
 - December natural fill day 01 extra 01 at 2025-12-01 08:23:00 +01:00
 - December natural fill day 01 extra 02 at 2025-12-01 08:46:00 +01:00
+- December natural fill day 01 extra 03 at 2025-12-01 09:09:00 +01:00
