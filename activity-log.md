@@ -88,3 +88,4 @@
 - December natural fill day 02 extra 04 at 2025-12-02 09:32:00 +01:00
 - December natural fill day 02 extra 05 at 2025-12-02 09:55:00 +01:00
 - December natural fill day 03 extra 01 at 2025-12-03 08:23:00 +01:00
+- December natural fill day 03 extra 02 at 2025-12-03 08:46:00 +01:00
