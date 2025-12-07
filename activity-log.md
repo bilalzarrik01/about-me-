@@ -120,3 +120,4 @@
 - December natural fill day 06 extra 03 at 2025-12-06 09:09:00 +01:00
 - December natural fill day 06 extra 04 at 2025-12-06 09:32:00 +01:00
 - December natural fill day 06 extra 05 at 2025-12-06 09:55:00 +01:00
+- December natural fill day 07 extra 01 at 2025-12-07 08:23:00 +01:00
