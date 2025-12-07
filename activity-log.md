@@ -127,3 +127,4 @@
 - December natural fill day 07 extra 05 at 2025-12-07 09:55:00 +01:00
 - December natural fill day 07 extra 06 at 2025-12-07 10:18:00 +01:00
 - December natural fill day 07 extra 07 at 2025-12-07 10:41:00 +01:00
+- December natural fill day 07 extra 08 at 2025-12-07 11:04:00 +01:00
