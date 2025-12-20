@@ -241,3 +241,4 @@
 - December natural fill day 19 extra 12 at 2025-12-19 12:36:00 +01:00
 - December natural fill day 19 extra 13 at 2025-12-19 12:59:00 +01:00
 - December natural fill day 20 extra 01 at 2025-12-20 08:23:00 +01:00
+- December natural fill day 20 extra 02 at 2025-12-20 08:46:00 +01:00
