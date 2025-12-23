@@ -352,3 +352,4 @@
 - December natural fill day 31 extra 09 at 2025-12-31 11:27:00 +01:00
 - December natural fill day 31 extra 10 at 2025-12-31 11:50:00 +01:00
 - December adjustment day 17 at 2025-12-17 12:00:00 +01:00
+- December adjustment day 23 at 2025-12-23 12:00:00 +01:00
