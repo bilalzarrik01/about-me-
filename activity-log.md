@@ -65,3 +65,4 @@
 - December fill commit day 22 at 2025-12-22 12:00:00 +01:00
 - December fill commit day 23 at 2025-12-23 12:00:00 +01:00
 - December fill commit day 24 at 2025-12-24 12:00:00 +01:00
+- December fill commit day 25 at 2025-12-25 12:00:00 +01:00
