@@ -292,3 +292,4 @@
 - December natural fill day 24 extra 13 at 2025-12-24 12:59:00 +01:00
 - December natural fill day 24 extra 14 at 2025-12-24 13:22:00 +01:00
 - December natural fill day 25 extra 01 at 2025-12-25 08:23:00 +01:00
+- December natural fill day 25 extra 02 at 2025-12-25 08:46:00 +01:00
