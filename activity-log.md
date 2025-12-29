@@ -319,3 +319,4 @@
 - December natural fill day 28 extra 06 at 2025-12-28 10:18:00 +01:00
 - December natural fill day 28 extra 07 at 2025-12-28 10:41:00 +01:00
 - December natural fill day 28 extra 08 at 2025-12-28 11:04:00 +01:00
+- December natural fill day 29 extra 01 at 2025-12-29 08:23:00 +01:00
