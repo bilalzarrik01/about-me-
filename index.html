@@ -1127,11 +1127,20 @@
                 font-size: 11px;
                 letter-spacing: 1px;
             }
+            .hero {
+                gap: 24px;
+            }
+            .hero-text {
+                margin-top: 0;
+            }
             .hero-visual {
                 inset: -40px -10px -40px -10px;
             }
             .hero p {
                 font-size: 16px;
+            }
+            .title-stack h1 {
+                font-size: clamp(48px, 13vw, 110px);
             }
             .stats span {
                 font-size: 22px;
@@ -1142,6 +1151,15 @@
             }
             .project-thumb img {
                 height: 150px;
+            }
+            .project-links {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .project-links span,
+            .project-links a {
+                width: 100%;
+                text-align: center;
             }
         }
 
@@ -1158,6 +1176,9 @@
             .project-card {
                 padding: 18px;
             }
+            .project-title {
+                font-size: 20px;
+            }
             .project-card:nth-child(odd),
             .project-card:nth-child(even) {
                 transform: none;
@@ -1166,6 +1187,9 @@
                 padding: 8px 14px;
                 font-size: 11px;
                 letter-spacing: 1px;
+            }
+            .section-title {
+                font-size: clamp(24px, 7vw, 40px);
             }
         }
     </style>
