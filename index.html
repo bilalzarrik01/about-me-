@@ -182,6 +182,26 @@
             color: var(--lime);
             opacity: 1;
         }
+
+        .menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(15, 15, 16, 0.72);
+            color: var(--white);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        .menu-toggle[aria-expanded="true"] {
+            border-color: rgba(199, 255, 61, 0.4);
+            color: var(--lime);
+        }
         
         .hero {
             display: grid;
@@ -1020,6 +1040,21 @@
                 transform: translateX(-50%);
             }
         }
+
+        @media (hover: none) {
+            .btn:hover,
+            .card:hover,
+            .label-card:hover,
+            .project-card:hover,
+            .portrait:hover {
+                transform: none;
+            }
+
+            .project-card:hover .project-thumb img {
+                transform: none;
+                filter: grayscale(1) contrast(1.15) brightness(0.9);
+            }
+        }
         
         @media (max-width: 1100px) {
             .hero {
@@ -1080,13 +1115,61 @@
         
         @media (max-width: 760px) {
             .page {
-                padding: 20px;
+                padding: max(18px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 32px max(16px, env(safe-area-inset-left));
+            }
+            header {
+                gap: 10px 12px;
+                padding: 10px 0;
+            }
+            .logo {
+                order: 1;
+            }
+            .status-pill {
+                order: 2;
+                width: auto;
+                justify-content: flex-start;
+                padding: 6px 12px;
+            }
+            .menu-toggle {
+                display: inline-flex;
+                order: 2;
+                margin-left: auto;
             }
             nav {
                 display: none;
+                order: 3;
+                width: 100%;
+                padding-top: 6px;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            header.nav-open nav {
+                display: flex;
+            }
+            nav a {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 14px;
+                border: 1px solid var(--line);
+                border-radius: 999px;
+                background: rgba(10, 10, 11, 0.75);
+                font-size: 15px;
+                letter-spacing: 1.2px;
+                opacity: 0.92;
+                white-space: nowrap;
+            }
+            .ticker-line {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                letter-spacing: 2px;
             }
             .stats {
                 grid-template-columns: 1fr;
+            }
+            .hero {
+                margin-top: 4px;
             }
             .grid-3 {
                 grid-template-columns: 1fr;
@@ -1119,10 +1202,33 @@
             }
             .project-meta {
                 flex-wrap: wrap;
+                max-width: 100%;
+                white-space: normal;
+                line-height: 1.4;
             }
             .timeline {
                 border-left: none;
                 padding-left: 0;
+            }
+            .section {
+                margin-top: 72px;
+            }
+            .section-sub {
+                font-size: 15px;
+                margin-bottom: 22px;
+            }
+            .card,
+            .project-card,
+            .contact-card {
+                padding: 18px;
+            }
+            .pill {
+                letter-spacing: 1px;
+                font-size: 11px;
+                padding: 6px 10px;
+            }
+            .footer {
+                margin-top: 56px;
             }
         }
 
@@ -1137,6 +1243,14 @@
                 font-size: 11px;
                 letter-spacing: 1px;
             }
+            .menu-toggle {
+                font-size: 11px;
+                letter-spacing: 1px;
+                padding: 8px 12px;
+            }
+            nav a {
+                flex: 1 1 calc(50% - 6px);
+            }
             .hero {
                 gap: 24px;
             }
@@ -1148,6 +1262,7 @@
             }
             .hero p {
                 font-size: 16px;
+                line-height: 1.7;
             }
             .title-stack h1 {
                 font-size: clamp(48px, 13vw, 110px);
@@ -1176,6 +1291,9 @@
         @media (max-width: 480px) {
             .page {
                 padding: 16px;
+            }
+            nav a {
+                flex: 1 1 100%;
             }
             .title-stack h1 {
                 line-height: 0.9;
@@ -1212,7 +1330,8 @@
             <div class="status-pill">
                 <span class="status-dot"></span> Disponible 2026
             </div>
-            <nav>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+            <nav id="site-nav">
                 <a href="#about">Profil</a>
                 <a href="#skills">Compétences</a>
                 <a href="#projects">Projets</a>
@@ -1605,6 +1724,36 @@
         </footer>
     </div>
 
+    <script>
+        const siteHeader = document.querySelector("header");
+        const menuToggle = document.querySelector(".menu-toggle");
+        const siteNav = document.getElementById("site-nav");
+        const mobileMenuQuery = window.matchMedia("(max-width: 760px)");
+
+        if (siteHeader && menuToggle && siteNav) {
+            const closeMenu = () => {
+                siteHeader.classList.remove("nav-open");
+                menuToggle.setAttribute("aria-expanded", "false");
+            };
+
+            menuToggle.addEventListener("click", () => {
+                const opening = !siteHeader.classList.contains("nav-open");
+                siteHeader.classList.toggle("nav-open", opening);
+                menuToggle.setAttribute("aria-expanded", opening ? "true" : "false");
+            });
+
+            siteNav.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", closeMenu);
+            });
+
+            mobileMenuQuery.addEventListener("change", (event) => {
+                if (!event.matches) {
+                    closeMenu();
+                }
+            });
+        }
+    </script>
+
 
     <script type="module">
         import * as THREE from "https://unpkg.com/three@0.160.1/build/three.module.js";
@@ -1612,6 +1761,7 @@
         const container = document.querySelector(".hero-visual");
         if (container) {
             const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const isMobileViewport = window.matchMedia("(max-width: 760px)").matches;
             const scene = new THREE.Scene();
             scene.fog = new THREE.Fog(0x050505, 8, 60);
 
@@ -1623,7 +1773,7 @@
                 alpha: true,
                 powerPreference: "high-performance"
             });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobileViewport ? 1.4 : 2));
             container.appendChild(renderer.domElement);
 
             const ambient = new THREE.AmbientLight(0xffffff, 0.65);
@@ -1633,7 +1783,7 @@
             fillLight.position.set(-6, -4, 6);
             scene.add(ambient, keyLight, fillLight);
 
-            const particleCount = 1400;
+            const particleCount = isMobileViewport ? 650 : 1400;
             const positions = new Float32Array(particleCount * 3);
             const offsets = new Float32Array(particleCount * 3);
             for (let i = 0; i < particleCount; i += 1) {
@@ -1715,7 +1865,7 @@
             }
             scene.add(orbGroup);
 
-            const lineCount = 220;
+            const lineCount = isMobileViewport ? 100 : 220;
             const linePositions = new Float32Array(lineCount * 6);
             for (let i = 0; i < lineCount; i += 1) {
                 const i6 = i * 6;
@@ -1800,7 +1950,7 @@
             shark.scale.setScalar(0.9);
             scene.add(shark);
 
-            const bubbleCount = 120;
+            const bubbleCount = isMobileViewport ? 70 : 120;
             const bubblePositions = new Float32Array(bubbleCount * 3);
             const bubbleVelocity = new Float32Array(bubbleCount * 3);
             const bubbleLife = new Float32Array(bubbleCount);
@@ -1849,13 +1999,15 @@
 
             resize();
             window.addEventListener("resize", resize);
-            window.addEventListener("mousemove", (event) => {
-                const { innerWidth, innerHeight } = window;
-                pointerTarget.x = (event.clientX / innerWidth - 0.5) * 0.6;
-                pointerTarget.y = (event.clientY / innerHeight - 0.5) * 0.6;
-                pointerNDC.x = (event.clientX / innerWidth) * 2 - 1;
-                pointerNDC.y = -(event.clientY / innerHeight) * 2 + 1;
-            });
+            if (!isMobileViewport) {
+                window.addEventListener("mousemove", (event) => {
+                    const { innerWidth, innerHeight } = window;
+                    pointerTarget.x = (event.clientX / innerWidth - 0.5) * 0.6;
+                    pointerTarget.y = (event.clientY / innerHeight - 0.5) * 0.6;
+                    pointerNDC.x = (event.clientX / innerWidth) * 2 - 1;
+                    pointerNDC.y = -(event.clientY / innerHeight) * 2 + 1;
+                });
+            }
 
             const animate = () => {
                 const elapsed = clock.getElapsedTime();
@@ -1878,9 +2030,13 @@
                     orb.position.z = base.z + Math.sin(elapsed * 0.7 + idx * 0.4) * 0.5;
                 });
 
-                raycaster.setFromCamera(pointerNDC, camera);
-                if (raycaster.ray.intersectPlane(sharkPlane, planeHit)) {
-                    sharkTarget.copy(planeHit);
+                if (!isMobileViewport) {
+                    raycaster.setFromCamera(pointerNDC, camera);
+                    if (raycaster.ray.intersectPlane(sharkPlane, planeHit)) {
+                        sharkTarget.copy(planeHit);
+                    }
+                } else {
+                    sharkTarget.set(-1 + Math.sin(elapsed * 0.45) * 1.3, 0.4 + Math.cos(elapsed * 0.65) * 0.45, 4);
                 }
                 shark.position.lerp(sharkTarget, 0.08);
                 sharkVelocity.copy(shark.position).sub(sharkPrev);
@@ -1934,6 +2090,7 @@
 
     <script>
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const mobileViewport = window.matchMedia("(max-width: 760px)").matches;
         if (!prefersReducedMotion) {
             const revealTargets = document.querySelectorAll(".reveal, .stagger");
             const observer = new IntersectionObserver(
@@ -1951,27 +2108,33 @@
             revealTargets.forEach((el) => observer.observe(el));
 
             const parallaxItems = Array.from(document.querySelectorAll("[data-parallax]"));
-            let ticking = false;
+            if (!mobileViewport && parallaxItems.length > 0) {
+                let ticking = false;
 
-            const updateParallax = () => {
-                const scrollY = window.scrollY || window.pageYOffset;
+                const updateParallax = () => {
+                    const scrollY = window.scrollY || window.pageYOffset;
+                    parallaxItems.forEach((el) => {
+                        const speed = Number(el.dataset.speed) || 0;
+                        const translateY = scrollY * speed;
+                        el.style.transform = `translate3d(0, ${translateY}px, 0)`;
+                    });
+                    ticking = false;
+                };
+
+                const requestTick = () => {
+                    if (!ticking) {
+                        requestAnimationFrame(updateParallax);
+                        ticking = true;
+                    }
+                };
+
+                updateParallax();
+                window.addEventListener("scroll", requestTick, { passive: true });
+            } else {
                 parallaxItems.forEach((el) => {
-                    const speed = Number(el.dataset.speed) || 0;
-                    const translateY = scrollY * speed;
-                    el.style.transform = `translate3d(0, ${translateY}px, 0)`;
+                    el.style.transform = "none";
                 });
-                ticking = false;
-            };
-
-            const requestTick = () => {
-                if (!ticking) {
-                    requestAnimationFrame(updateParallax);
-                    ticking = true;
-                }
-            };
-
-            updateParallax();
-            window.addEventListener("scroll", requestTick, { passive: true });
+            }
         } else {
             document.querySelectorAll(".reveal, .stagger").forEach((el) => {
                 el.classList.add("in-view");
