@@ -347,6 +347,12 @@
             color: var(--lime);
             font-size: 26px;
             margin-bottom: 6px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .count-up {
+            display: inline-block;
+            min-width: 3ch;
         }
         
         .stats div:hover {
@@ -875,6 +881,10 @@
             grid-template-columns: 1fr 1fr;
             gap: 32px;
         }
+
+        .services-split {
+            margin-top: 24px;
+        }
         
         .contact-card {
             padding: 26px;
@@ -1206,6 +1216,7 @@
                 <a href="#about">Profil</a>
                 <a href="#skills">Compétences</a>
                 <a href="#projects">Projets</a>
+                <a href="#services">Services</a>
                 <a href="#experience">Expérience</a>
                 <a href="#education">Éducation</a>
                 <a href="#contact">Contact</a>
@@ -1236,17 +1247,17 @@
                 <div class="cta-row">
                     <a class="btn primary" href="#skills">Voir compétences</a>
                     <a class="btn" href="#contact">Me contacter</a>
-                    <a class="btn" href="cv.pdf" download>Télécharger CV</a>
+                    <a class="btn" href="cv1.pdf" download>Télécharger CV</a>
                 </div>
                 <div class="stats stagger">
                     <div>
-                        <span>2024</span> Baccalauréat SVT
+                        <span class="count-up" data-count="2024" data-duration="1300">2024</span> Baccalauréat SVT
                     </div>
                     <div>
-                        <span>2025</span> YouCode Full Stack
+                        <span class="count-up" data-count="2025" data-duration="1400">2025</span> YouCode Full Stack
                     </div>
                     <div>
-                        <span>3+</span> Ans d’expérience
+                        <span class="count-up" data-count="3" data-suffix="+">3+</span> Ans d’expérience
                     </div>
                 </div>
                 <div class="marquee">
@@ -1407,6 +1418,71 @@
                         <span>Démo à venir</span>
                     </div>
                 </article>
+            </div>
+        </section>
+
+        <section class="section" id="services">
+            <div class="section-title">Services</div>
+            <div class="section-sub">
+                Ce que je peux apporter rapidement à un projet web, de l’idée au lancement.
+            </div>
+            <div class="grid-3 stagger">
+                <article class="card">
+                    <h3>Landing Pages</h3>
+                    <p>Création de pages modernes, rapides et optimisées pour présenter un produit, un service ou un événement.</p>
+                    <div class="pill-row">
+                        <span class="pill">HTML/CSS</span>
+                        <span class="pill">Responsive</span>
+                        <span class="pill">UX Focus</span>
+                    </div>
+                </article>
+                <article class="card">
+                    <h3>Sites Vitrine</h3>
+                    <p>Développement de sites clairs et professionnels pour PME, indépendants et projets locaux.</p>
+                    <div class="pill-row">
+                        <span class="pill">PHP</span>
+                        <span class="pill">Bootstrap</span>
+                        <span class="pill">SEO Basique</span>
+                    </div>
+                </article>
+                <article class="card">
+                    <h3>Support Technique</h3>
+                    <p>Maintenance, améliorations visuelles et petites évolutions backend sur des projets déjà en production.</p>
+                    <div class="pill-row">
+                        <span class="pill">Corrections</span>
+                        <span class="pill">Optimisation</span>
+                        <span class="pill">Maintenance</span>
+                    </div>
+                </article>
+            </div>
+            <div class="split services-split">
+                <div class="card reveal">
+                    <h3>Processus</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span>01</span>
+                            <p>Échange rapide pour clarifier les objectifs, les délais et le public cible.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span>02</span>
+                            <p>Prototype visuel + structure technique pour valider le cap avant développement.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span>03</span>
+                            <p>Livraison avec améliorations et suivi selon les retours.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <h3>Prêt à collaborer</h3>
+                    <p>Disponible pour stage, mission freelance courte ou contribution sur un projet étudiant/professionnel.</p>
+                    <div class="pill-row">
+                        <span class="pill">Stage</span>
+                        <span class="pill">Freelance</span>
+                        <span class="pill">Collaboration</span>
+                    </div>
+                    <a class="btn primary" href="#contact">Parler de votre projet</a>
+                </div>
             </div>
         </section>
 
@@ -1900,6 +1976,87 @@
             document.querySelectorAll(".reveal, .stagger").forEach((el) => {
                 el.classList.add("in-view");
             });
+        }
+    </script>
+
+    <script>
+        const counterReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const counterItems = Array.from(document.querySelectorAll(".count-up[data-count]"));
+        const counterRafs = new WeakMap();
+
+        const animateCounter = (el) => {
+            const target = Number(el.dataset.count || "0");
+            const suffix = el.dataset.suffix || "";
+            const duration = Number(el.dataset.duration || "1200");
+
+            if (!Number.isFinite(target)) {
+                return;
+            }
+
+            if (counterReducedMotion) {
+                el.textContent = `${target}${suffix}`;
+                return;
+            }
+
+            const existingRaf = counterRafs.get(el);
+            if (existingRaf) {
+                cancelAnimationFrame(existingRaf);
+            }
+
+            el.textContent = `0${suffix}`;
+            let startTime = null;
+            const step = (timestamp) => {
+                if (startTime === null) {
+                    startTime = timestamp;
+                }
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const value = Math.floor(target * eased);
+                el.textContent = `${value}${suffix}`;
+
+                if (progress < 1) {
+                    const rafId = requestAnimationFrame(step);
+                    counterRafs.set(el, rafId);
+                } else {
+                    el.textContent = `${target}${suffix}`;
+                    counterRafs.delete(el);
+                }
+            };
+
+            const rafId = requestAnimationFrame(step);
+            counterRafs.set(el, rafId);
+        };
+
+        const resetCounter = (el) => {
+            const suffix = el.dataset.suffix || "";
+            const existingRaf = counterRafs.get(el);
+            if (existingRaf) {
+                cancelAnimationFrame(existingRaf);
+                counterRafs.delete(el);
+            }
+            el.textContent = `0${suffix}`;
+        };
+
+        if (counterItems.length > 0) {
+            if (counterReducedMotion || !("IntersectionObserver" in window)) {
+                counterItems.forEach((item) => animateCounter(item));
+            } else {
+                const counterObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.intersectionRatio >= 0.45) {
+                            if (entry.target.dataset.counterActive !== "1") {
+                                entry.target.dataset.counterActive = "1";
+                                animateCounter(entry.target);
+                            }
+                        } else if (entry.target.dataset.counterActive === "1" && entry.intersectionRatio <= 0.2) {
+                            entry.target.dataset.counterActive = "0";
+                            resetCounter(entry.target);
+                        }
+                    });
+                }, { threshold: [0, 0.2, 0.45] });
+
+                counterItems.forEach((item) => counterObserver.observe(item));
+            }
         }
     </script>
 </body>
