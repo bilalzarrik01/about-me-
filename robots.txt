@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bilalzarrik01.github.io/about-me-/sitemap.xml
