@@ -10,20 +10,20 @@
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 
     <meta name="theme-color" content="#050505" />
-    <link rel="icon" type="image/png" href="/imagecopy.png" />
+    <link rel="icon" type="image/png" href="/bilal.png" />
     <link rel="canonical" href="https://bilal.zarrik.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_MA" />
     <meta property="og:url" content="https://bilal.zarrik.com/" />
     <meta property="og:title" content="Bilal Zarrik | Développeur Full Stack à Nador, Maroc" />
     <meta property="og:description" content="Portfolio de Bilal Zarrik, développeur web full stack à Nador, Maroc. Projets en HTML, CSS, JavaScript, PHP, MySQL et services web." />
-    <meta property="og:image" content="https://bilal.zarrik.com/imagecopy.png" />
+    <meta property="og:image" content="https://bilal.zarrik.com/bilal.png" />
     <meta property="og:image:alt" content="Portrait de Bilal Zarrik" />
     <meta property="og:site_name" content="Bilal Zarrik Portfolio" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Bilal Zarrik | Développeur Full Stack à Nador, Maroc" />
     <meta name="twitter:description" content="Portfolio de Bilal Zarrik, développeur web full stack à Nador, Maroc. Projets en HTML, CSS, JavaScript, PHP et MySQL." />
-    <meta name="twitter:image" content="https://bilal.zarrik.com/imagecopy.png" />
+    <meta name="twitter:image" content="https://bilal.zarrik.com/bilal.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
@@ -294,6 +294,8 @@
             margin-top: -8px;
             position: relative;
             z-index: 1;
+            perspective: 1800px;
+            perspective-origin: 50% 40%;
         }
         
         .hero-visual {
@@ -319,6 +321,14 @@
             margin-top: 16px;
             position: relative;
             z-index: 2;
+            --tilt-x: 0deg;
+            --tilt-y: 0deg;
+            --lift: 0px;
+            --depth: 0px;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            transition: transform 0.22s ease;
+            transform: perspective(1800px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translate3d(0, var(--lift), var(--depth));
         }
         
         .hero .eyebrow {
@@ -412,7 +422,14 @@
             background: transparent;
             color: var(--white);
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            --tilt-x: 0deg;
+            --tilt-y: 0deg;
+            --lift: 0px;
+            --depth: 0px;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            transform: perspective(1200px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translate3d(0, var(--lift), var(--depth));
         }
         
         .btn.primary {
@@ -424,7 +441,8 @@
         }
         
         .btn:hover {
-            transform: translateY(-2px);
+            --lift: -2px;
+            --depth: 10px;
         }
         
         .stats {
@@ -442,7 +460,14 @@
             border-radius: 16px;
             background: var(--glass);
             border: 1px solid var(--line);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            --tilt-x: 0deg;
+            --tilt-y: 0deg;
+            --lift: 0px;
+            --depth: 0px;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            transform: perspective(1200px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translate3d(0, var(--lift), var(--depth));
         }
         
         .stats span {
@@ -459,7 +484,8 @@
         }
         
         .stats div:hover {
-            transform: translateY(-4px);
+            --lift: -4px;
+            --depth: 12px;
             box-shadow: 0 16px 30px rgba(199, 255, 61, 0.12);
         }
         
@@ -533,8 +559,25 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            margin-top: 0;
+            margin-top: -50px;
             z-index: 2;
+            width: 70%;
+            justify-self: center;
+            perspective: 1800px;
+            perspective-origin: 50% 60%;
+            --tilt-x: 0deg;
+            --tilt-y: 0deg;
+            --lift: 0px;
+            --depth: 0px;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            transition: transform 0.22s ease;
+            transform: perspective(1800px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translate3d(0, var(--lift), var(--depth));
+        }
+
+        .portrait-wrap:hover {
+            --lift: -6px;
+            --depth: 22px;
         }
         
         .portrait-back {
@@ -548,7 +591,8 @@
         
         .portrait {
             position: relative;
-            width: min(420px, 80vw);
+            width: 100%;
+            max-width: 420px;
             aspect-ratio: 3 / 4;
             border-radius: 28px;
             overflow: hidden;
@@ -600,6 +644,295 @@
         .portrait:hover::before {
             opacity: 0.9;
             transform: translate3d(0, 0, 0) rotate(12deg);
+        }
+
+        .hover-bot {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: min(150px, 24vw);
+            z-index: 50;
+            pointer-events: none;
+            opacity: 0;
+            transform: translate3d(-999px, -999px, 0);
+            transition: opacity 0.22s ease;
+            display: grid;
+            gap: 8px;
+            justify-items: stretch;
+        }
+
+        body.bot-active .hover-bot {
+            opacity: 1;
+        }
+
+        .hover-bot__body {
+            position: relative;
+            width: 128px;
+            height: 128px;
+            margin-left: auto;
+            margin-right: 18px;
+            filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.38));
+            animation: botFloat 3.4s ease-in-out infinite;
+        }
+
+        .hover-bot__frame {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border: 0;
+            border-radius: 16px;
+            background: transparent;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.36);
+            pointer-events: auto;
+        }
+
+        .hover-bot__head {
+            position: absolute;
+            inset: 0 0 34px 0;
+            border-radius: 32px;
+            background: linear-gradient(165deg, rgba(255, 255, 255, 0.96), rgba(196, 201, 210, 0.96));
+            box-shadow: inset 0 -10px 24px rgba(0, 0, 0, 0.14);
+        }
+
+        .hover-bot__screen {
+            position: absolute;
+            inset: 18px 16px 38px;
+            border-radius: 22px;
+            background: linear-gradient(180deg, #18181c, #050506);
+            border: 1px solid rgba(124, 238, 255, 0.25);
+            overflow: hidden;
+        }
+
+        .hover-bot__screen::before,
+        .hover-bot__screen::after {
+            content: "";
+            position: absolute;
+            top: 42%;
+            width: 24px;
+            height: 14px;
+            border-radius: 20px 20px 4px 4px;
+            border-top: 4px solid #86efff;
+            transform: translateY(-50%);
+            box-shadow: 0 0 16px rgba(134, 239, 255, 0.25);
+        }
+
+        .hover-bot__screen::before {
+            left: 22px;
+            transform: translateY(-50%) rotate(-12deg);
+        }
+
+        .hover-bot__screen::after {
+            right: 22px;
+            transform: translateY(-50%) rotate(12deg);
+        }
+
+        .hover-bot__antenna {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            width: 6px;
+            height: 22px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, #dfe4ea, #7cefff);
+            transform: translateX(-50%);
+        }
+
+        .hover-bot__antenna::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #86efff;
+            box-shadow: 0 0 18px rgba(134, 239, 255, 0.85);
+            transform: translateX(-50%);
+        }
+
+        .hover-bot__arm {
+            position: absolute;
+            top: 42px;
+            width: 30px;
+            height: 74px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, rgba(216, 221, 229, 0.96), rgba(116, 184, 235, 0.96));
+            box-shadow: inset 0 -10px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .hover-bot__arm::after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, rgba(196, 202, 212, 0.96), rgba(124, 190, 238, 0.96));
+            transform: translateX(-50%);
+        }
+
+        .hover-bot__arm.left {
+            left: -14px;
+            transform: rotate(-26deg);
+        }
+
+        .hover-bot__arm.right {
+            right: -14px;
+            transform: rotate(26deg);
+        }
+
+        .hover-bot__body-core {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 124px;
+            height: 92px;
+            border-radius: 28px 28px 34px 34px;
+            transform: translateX(-50%);
+            background: linear-gradient(180deg, rgba(149, 202, 245, 0.98), rgba(183, 190, 200, 0.98));
+            box-shadow: inset 0 -12px 20px rgba(0, 0, 0, 0.16);
+        }
+
+        .hover-bot__core-light {
+            position: absolute;
+            left: 50%;
+            top: 2px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #d7ffff, #58dfff 55%, #1f84ff 100%);
+            box-shadow: 0 0 24px rgba(134, 239, 255, 0.7);
+            transform: translateX(-50%);
+        }
+
+        .hover-bot__speech {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 14px;
+            border: 1px solid rgba(134, 239, 255, 0.18);
+            background: rgba(6, 6, 6, 0.72);
+            color: var(--white);
+            font-family: "Playfair Display", "Times New Roman", serif;
+            font-size: 12px;
+            line-height: 1.45;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.38);
+        }
+
+        .hover-bot__speech span {
+            color: var(--lime);
+        }
+
+        @keyframes botFloat {
+            0%,
+            100% {
+                transform: translate3d(0, 0, 0) rotate(-2deg);
+            }
+            50% {
+                transform: translate3d(0, -8px, 0) rotate(2deg);
+            }
+        }
+
+        .portrait-tags {
+            position: absolute;
+            inset: -18px;
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            transform: translateZ(60px);
+        }
+
+        .portrait:hover .portrait-tags {
+            opacity: 1;
+        }
+
+        .portrait-tag {
+            position: absolute;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(199, 255, 61, 0.22);
+            background: rgba(8, 8, 8, 0.72);
+            color: var(--white);
+            font-family: "Bebas Neue", "Anton", Impact, sans-serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            transform: translate3d(0, 12px, 0) scale(0.92);
+            animation: tagFloat 3.2s ease-in-out infinite;
+        }
+
+        .portrait-tag:nth-child(1) {
+            top: 10%;
+            left: -8%;
+            animation-delay: 0s;
+        }
+
+        .portrait-tag:nth-child(2) {
+            top: 2%;
+            right: 6%;
+            animation-delay: 0.18s;
+        }
+
+        .portrait-tag:nth-child(3) {
+            top: 20%;
+            right: -12%;
+            animation-delay: 0.36s;
+        }
+
+        .portrait-tag:nth-child(4) {
+            bottom: 30%;
+            left: -14%;
+            animation-delay: 0.54s;
+        }
+
+        .portrait-tag:nth-child(5) {
+            bottom: 12%;
+            right: 8%;
+            animation-delay: 0.72s;
+        }
+
+        .portrait-tag:nth-child(6) {
+            top: 48%;
+            left: 4%;
+            animation-delay: 0.9s;
+        }
+
+        .portrait-tag:nth-child(7) {
+            bottom: 2%;
+            left: 24%;
+            animation-delay: 1.08s;
+        }
+
+        .portrait-tag:nth-child(8) {
+            top: 36%;
+            left: 58%;
+            animation-delay: 1.26s;
+        }
+
+        .portrait-tag:nth-child(9) {
+            top: 14%;
+            left: 24%;
+            animation-delay: 1.44s;
+        }
+
+        .portrait-tag:nth-child(10) {
+            bottom: 20%;
+            left: 44%;
+            animation-delay: 1.62s;
+        }
+
+        @keyframes tagFloat {
+            0%,
+            100% {
+                transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translate3d(10px, -10px, 0) rotate(3deg) scale(1.05);
+            }
         }
         
         .overlay-text {
@@ -662,7 +995,14 @@
             flex-direction: column;
             gap: 12px;
             min-height: 180px;
+            --tilt-x: 0deg;
+            --tilt-y: 0deg;
+            --lift: 0px;
+            --depth: 0px;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
             transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            transform: perspective(1500px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translate3d(0, var(--lift), var(--depth));
         }
         
         .card h3 {
@@ -678,7 +1018,8 @@
         }
         
         .card:hover {
-            transform: translateY(-6px);
+            --lift: -6px;
+            --depth: 16px;
             border-color: rgba(199, 255, 61, 0.35);
             box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
         }
@@ -705,6 +1046,8 @@
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 26px;
             position: relative;
+            perspective: 1800px;
+            perspective-origin: 50% 50%;
         }
         
         .projects::before,
@@ -737,6 +1080,8 @@
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 18px;
             margin-bottom: 22px;
+            perspective: 1500px;
+            perspective-origin: 50% 50%;
         }
         
         .label-card {
@@ -748,11 +1093,19 @@
             letter-spacing: 3px;
             display: grid;
             gap: 6px;
+            --tilt-x: 0deg;
+            --tilt-y: 0deg;
+            --lift: 0px;
+            --depth: 0px;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
             transition: transform 0.25s ease, border-color 0.25s ease;
+            transform: perspective(1500px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translate3d(0, var(--lift), var(--depth));
         }
         
         .label-card:hover {
-            transform: translateY(-4px);
+            --lift: -4px;
+            --depth: 12px;
             border-color: rgba(199, 255, 61, 0.35);
         }
         
@@ -785,9 +1138,17 @@
             overflow: hidden;
             display: grid;
             gap: 14px;
+            --tilt-x: 0deg;
+            --tilt-y: 0deg;
+            --lift: 0px;
+            --depth: 0px;
+            --offset-y: 0px;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
             transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
             isolation: isolate;
             box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(199, 255, 61, 0.05);
+            transform: perspective(1800px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translate3d(0, calc(var(--offset-y) + var(--lift)), var(--depth));
         }
         
         .project-card>* {
@@ -872,22 +1233,24 @@
         }
         
         .project-card:hover {
-            transform: translateY(-8px) scale(1.01);
+            --lift: -8px;
+            --depth: 22px;
             border-color: rgba(199, 255, 61, 0.35);
             box-shadow: 0 26px 55px rgba(0, 0, 0, 0.55), 0 0 50px rgba(199, 255, 61, 0.12);
         }
         
         .project-card:nth-child(odd) {
-            transform: translateY(10px);
+            --offset-y: 10px;
         }
         
         .project-card:nth-child(even) {
-            transform: translateY(-6px);
+            --offset-y: -6px;
         }
         
         .project-card:hover:nth-child(odd),
         .project-card:hover:nth-child(even) {
-            transform: translateY(-8px) scale(1.01);
+            --lift: -8px;
+            --depth: 22px;
         }
         
         .project-card:hover .project-thumb img {
@@ -1135,6 +1498,13 @@
                 transform: none;
                 filter: grayscale(1) contrast(1.15) brightness(0.9);
             }
+            .portrait-tags,
+            .portrait:hover .portrait-tags {
+                opacity: 0;
+            }
+            .hover-bot {
+                display: none;
+            }
         }
         
         @media (max-width: 1100px) {
@@ -1146,6 +1516,8 @@
             }
             .portrait-wrap {
                 order: -1;
+                margin-top: 0;
+                width: 100%;
             }
             .overlay-text {
                 left: 0;
@@ -1275,11 +1647,18 @@
                 width: 100%;
             }
             .portrait {
-                width: min(100%, 340px);
+                width: 100%;
+                max-width: 340px;
                 margin-inline: auto;
             }
             .portrait-back {
                 inset: 10px 8px 0 8px;
+            }
+            .portrait-tags {
+                display: none;
+            }
+            .hover-bot {
+                display: none;
             }
             .badge {
                 right: 12px;
@@ -1514,9 +1893,9 @@
                     Étudiant motivé et polyvalent à Nador, passionné par le développement web et les technologies modernes. Je combine des compétences techniques en Full Stack avec une formation en management.
                 </p>
                 <div class="cta-row">
-                    <a class="btn primary" href="#skills">Voir compétences</a>
-                    <a class="btn" href="#contact">Me contacter</a>
-                    <a class="btn" href="cv.pdf" download>Télécharger CV</a>
+                    <a class="btn primary" href="#skills" data-bot-desc="Jump to the skills section.">Voir compétences</a>
+                    <a class="btn" href="#contact" data-bot-desc="Open the contact section.">Me contacter</a>
+                    <a class="btn" href="cv.pdf" download data-bot-desc="Download the CV as a PDF file.">Télécharger CV</a>
                 </div>
                 <div class="stats stagger">
                     <div>
@@ -1535,11 +1914,22 @@
                 <div class="drive-note">Veuillez faire défiler · Vision verticale</div>
             </div>
 
-            <div class="portrait-wrap reveal" data-parallax data-speed="-0.06">
+            <div class="portrait-wrap reveal" data-parallax data-speed="-0.06" data-bot-desc="Portrait focus. Hover to reveal the identity layer and animated tags.">
                 <div class="portrait-back"></div>
                 <div class="portrait">
                     <img src="imagecopy.png" alt="Portrait de Bilal Zarrik" loading="eager" fetchpriority="high" decoding="async" />
                     <div class="badge">Disponible 2026</div>
+                    <div class="portrait-tags" aria-hidden="true">
+                        <span class="portrait-tag">HTML</span>
+                        <span class="portrait-tag">Laravel</span>
+                        <span class="portrait-tag">Figma</span>
+                        <span class="portrait-tag">Canva</span>
+                        <span class="portrait-tag">Jira</span>
+                        <span class="portrait-tag">Trello</span>
+                        <span class="portrait-tag">Git</span>
+                        <span class="portrait-tag">GitHub</span>
+                        <span class="portrait-tag">UML</span>
+                    </div>
                 </div>
                 <div class="overlay-text" data-parallax data-speed="0.12">STACK</div>
             </div>
@@ -1874,12 +2264,16 @@
         </footer>
     </main>
 
+    <div class="hover-bot" aria-hidden="true">
+        <iframe class="hover-bot__frame" src="https://my.spline.design/genkubgreetingrobot-VxpMr0axHpd4G616zdobaiQw/" title="Spline robot assistant" loading="lazy" allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+        <div class="hover-bot__speech"><span id="hover-bot-text">Hover a section and I will explain it.</span></div>
+    </div>
+
     <script>
         const siteHeader = document.querySelector("header");
         const menuToggle = document.querySelector(".menu-toggle");
         const siteNav = document.getElementById("site-nav");
         const mobileMenuQuery = window.matchMedia("(max-width: 760px)");
-
         if (siteHeader && menuToggle && siteNav) {
             const closeMenu = () => {
                 siteHeader.classList.remove("nav-open");
@@ -1902,6 +2296,112 @@
                 }
             });
         }
+
+        const robotBot = document.querySelector(".hover-bot");
+        const robotSpeech = document.getElementById("hover-bot-text");
+        const robotReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const robotFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+        if (robotBot && robotSpeech && !robotReducedMotion && robotFinePointer) {
+            const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+            const interactiveSelector = ".btn, .card, .label-card, .project-card, .portrait-wrap, .stats div, nav a";
+            let hoveredTarget = null;
+
+            const setSpeech = (message) => {
+                robotSpeech.textContent = message;
+            };
+
+            const defaultSpeech = "Hover a section and I will explain it.";
+
+            const describeTarget = (target) => {
+                if (!(target instanceof Element)) {
+                    return defaultSpeech;
+                }
+
+                if (target.dataset.botDesc) {
+                    return target.dataset.botDesc;
+                }
+
+                if (target.closest(".portrait-wrap")) {
+                    return "Portrait focus. Hover reveals the visual identity and motion tags.";
+                }
+
+                if (target.closest("nav a")) {
+                    return `Jump to ${target.textContent.trim()} section.`;
+                }
+
+                if (target.closest(".btn")) {
+                    return `Action button: ${target.textContent.trim()}.`;
+                }
+
+                if (target.closest(".project-card")) {
+                    const card = target.closest(".project-card");
+                    const title = card?.querySelector(".project-title")?.textContent?.trim() || "project";
+                    return `Project card: ${title}.`;
+                }
+
+                if (target.closest(".label-card")) {
+                    const labelCard = target.closest(".label-card");
+                    const title = labelCard?.querySelector("strong")?.textContent?.trim() || "label";
+                    return `Section label: ${title}.`;
+                }
+
+                if (target.closest(".card")) {
+                    const card = target.closest(".card");
+                    const title = card?.querySelector("h3")?.textContent?.trim() || "card";
+                    return `Content card: ${title}.`;
+                }
+
+                if (target.closest(".stats div")) {
+                    return "Metric block. It highlights key milestones and years.";
+                }
+
+                return defaultSpeech;
+            };
+
+            const positionRobot = (clientX, clientY) => {
+                const x = clamp(clientX + 18, 12, window.innerWidth - 170);
+                const y = clamp(clientY + 18, 12, window.innerHeight - 220);
+                robotBot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+            };
+
+            document.body.classList.add("bot-active");
+            setSpeech(defaultSpeech);
+
+            document.addEventListener("pointermove", (event) => {
+                positionRobot(event.clientX, event.clientY);
+            }, {
+                passive: true
+            });
+
+            document.addEventListener("pointerover", (event) => {
+                const target = event.target instanceof Element ? event.target.closest(interactiveSelector) : null;
+                hoveredTarget = target;
+                setSpeech(describeTarget(target || event.target));
+            });
+
+            document.addEventListener("pointerout", (event) => {
+                if (!hoveredTarget) {
+                    return;
+                }
+
+                const relatedTarget = event.relatedTarget instanceof Element ? event.relatedTarget : null;
+                if (!relatedTarget || !hoveredTarget.contains(relatedTarget)) {
+                    hoveredTarget = null;
+                    setSpeech(defaultSpeech);
+                }
+            });
+
+            window.addEventListener("resize", () => {
+                if (!robotBot.style.transform) {
+                    return;
+                }
+                const currentX = window.innerWidth - 180;
+                const currentY = window.innerHeight - 230;
+                robotBot.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+            });
+        }
+
     </script>
 
 
@@ -2003,9 +2503,71 @@
                                 el.style.transform = "none";
                             });
                         }
-                    } else {
+                } else {
                         document.querySelectorAll(".reveal, .stagger").forEach((el) => {
                             el.classList.add("in-view");
+                        });
+                    }
+                </script>
+
+                <script>
+                    const tiltReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+                    if (!tiltReducedMotion && finePointer) {
+                        const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+                        const tiltTargets = Array.from(
+                            document.querySelectorAll(".hero-text, .portrait-wrap, .card, .label-card, .project-card, .stats div, .btn")
+                        );
+
+                        const getTiltStrength = (el) => {
+                            if (el.classList.contains("project-card")) return 8;
+                            if (el.classList.contains("portrait-wrap")) return 7;
+                            if (el.classList.contains("hero-text")) return 6;
+                            if (el.classList.contains("btn")) return 3;
+                            return 5;
+                        };
+
+                        tiltTargets.forEach((el) => {
+                            let frameId = 0;
+                            let tiltX = 0;
+                            let tiltY = 0;
+                            const maxRotate = getTiltStrength(el);
+
+                            const render = () => {
+                                frameId = 0;
+                                el.style.setProperty("--tilt-x", `${tiltX.toFixed(2)}deg`);
+                                el.style.setProperty("--tilt-y", `${tiltY.toFixed(2)}deg`);
+                            };
+
+                            const schedule = () => {
+                                if (!frameId) {
+                                    frameId = requestAnimationFrame(render);
+                                }
+                            };
+
+                            el.addEventListener("pointermove", (event) => {
+                                const rect = el.getBoundingClientRect();
+                                if (rect.width === 0 || rect.height === 0) {
+                                    return;
+                                }
+
+                                const x = clamp((event.clientX - rect.left) / rect.width, 0, 1) - 0.5;
+                                const y = clamp((event.clientY - rect.top) / rect.height, 0, 1) - 0.5;
+                                tiltY = x * maxRotate * 2;
+                                tiltX = -y * maxRotate * 2;
+                                schedule();
+                            }, {
+                                passive: true
+                            });
+
+                            el.addEventListener("pointerleave", () => {
+                                tiltX = 0;
+                                tiltY = 0;
+                                el.style.setProperty("--tilt-x", "0deg");
+                                el.style.setProperty("--tilt-y", "0deg");
+                                frameId = 0;
+                            });
                         });
                     }
                 </script>
